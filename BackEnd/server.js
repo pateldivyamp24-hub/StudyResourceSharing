@@ -7,9 +7,13 @@ const cors = require("cors");
 const authRoutes = require("./routes/auth");
 
 const app = express();
-
 app.use(cors({
-  origin: "*"
+  origin: [
+    "http://localhost:4200",
+    "https://study-resource-sharing.vercel.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }));
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));

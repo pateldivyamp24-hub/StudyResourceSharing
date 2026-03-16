@@ -1,0 +1,27 @@
+<div class="container mt-5">
+  <h2>Upload Notes</h2>
+
+  <form (ngSubmit)="uploadNote()" enctype="multipart/form-data">
+
+    <div class="mb-3">
+      <label>Title</label>
+      <input type="text" class="form-control"
+      [(ngModel)]="note.title" name="title" required>
+    </div>
+
+    <div class="mb-3">
+      <label>Subject</label>
+      <input type="text" class="form-control"
+      [(ngModel)]="note.subject" name="subject" required>
+    </div>
+
+    <div class="mb-3">
+      <label>File (PDF)</label>
+      <input type="file" class="form-control"
+      (change)="onFileSelect($event)" required>
+    </div>
+
+    <button class="btn btn-primary">Upload</button>
+
+  </form>
+</div>

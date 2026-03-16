@@ -1,0 +1,42 @@
+<div class="notes-container">
+
+  <h2>Available Notes</h2>
+
+  <input
+    type="text"
+    placeholder="Search notes..."
+    [(ngModel)]="searchText"
+    class="search-box"
+  />
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Subject</th>
+        <th>Uploaded By</th>
+        <th>Downloads</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let note of notes">
+
+        <td>{{note.title}}</td>
+        <td>{{note.subject}}</td>
+        <td>{{note.uploadedBy}}</td>
+        <td>{{note.downloads}}</td>
+
+        <td>
+
+          <button (click)="download(note._id)">
+            Download
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

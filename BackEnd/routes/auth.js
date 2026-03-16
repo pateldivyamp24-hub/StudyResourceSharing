@@ -9,33 +9,33 @@ const jwt = require("jsonwebtoken");
 router.post("/signup", async (req, res) => {
   try {
 
-    const {name,email,password} = req.body;
+    const { name, email, password } = req.body;
 
+    const userExists = await User.findOne({ email });
 
-    const userExists = await User.findOne({email});
-    if(userExists){
-        return res.status(400).json({message:"User already exists"});
+    if (userExists) {
+      return res.status(400).json({ message: "User already exists" });
     }
 
+    const bcrypt = require("bcryptjs");
 
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password,salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new User({
-        name,
-        email,
-        password:hashedPassword
+      name,
+      email,
+      password: hashedPassword
     });
 
     await newUser.save();
 
-    res.json({message:"User registered successfully"});
+    res.json({ message: "User registered successfully" });
 
-  } catch(err){
-    res.status(500).json({error:err.message});
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
-
 
 router.post("/login", async (req,res)=>{
   try{

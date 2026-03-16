@@ -4,7 +4,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const fs = require("fs");
-
 if (!fs.existsSync("uploads")) {
   fs.mkdirSync("uploads");
 }
@@ -20,10 +19,7 @@ app.use(cors({
   allowedHeaders:["Content-Type","Authorization"]
 }));
 app.use(express.json());
-const fs = require("fs");
-if (!fs.existsSync("uploads")) {
-  fs.mkdirSync("uploads");
-}
+
 
 app.use("/uploads", express.static("uploads"));
 app.use("/uploads", express.static("uploads"));

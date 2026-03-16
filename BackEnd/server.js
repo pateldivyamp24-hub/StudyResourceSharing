@@ -3,7 +3,11 @@ const noteRoutes = require("./routes/notes");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const fs = require("fs");
 
+if (!fs.existsSync("uploads")) {
+  fs.mkdirSync("uploads");
+}
 const authRoutes = require("./routes/auth");
 
 const app = express();
@@ -12,10 +16,16 @@ app.use(cors({
     "http://localhost:4200",
     "https://study-resource-sharing.vercel.app"
   ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+  methods:["GET","POST","PUT","DELETE"],
+  allowedHeaders:["Content-Type","Authorization"]
 }));
 app.use(express.json());
+const fs = require("fs");
+if (!fs.existsSync("uploads")) {
+  fs.mkdirSync("uploads");
+}
+
+app.use("/uploads", express.static("uploads"));
 app.use("/uploads", express.static("uploads"));
 app.use("/api/auth", authRoutes);
 app.use("/api/notes", noteRoutes);

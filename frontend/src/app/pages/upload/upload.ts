@@ -24,26 +24,31 @@ export class UploadComponent {
     this.selectedFile = event.target.files[0];
   }
 
-  uploadNote(){
+ uploadNote(){
 
-    const formData = new FormData();
-
-    formData.append("title",this.note.title);
-    formData.append("subject",this.note.subject);
-    formData.append("uploadedBy",this.note.uploadedBy);
-    formData.append("file",this.selectedFile);
-
-    this.notesService.uploadNote(formData).subscribe({
-      next:(res)=>{
-        alert("Note uploaded successfully");
-        console.log(res);
-      },
-      error:(err)=>{
-        alert("Upload failed");
-        console.log(err);
-      }
-    });
-
+  if(!this.selectedFile){
+    alert("Please select file");
+    return;
   }
+
+  console.log("Uploading..."); // DEBUG
+
+  const formData = new FormData();
+
+  formData.append("title",this.note.title);
+  formData.append("subject",this.note.subject);
+  formData.append("uploadedBy",this.note.uploadedBy);
+  formData.append("file",this.selectedFile);
+
+  this.notesService.uploadNote(formData).subscribe({
+    next:(res)=>{
+      alert("Note uploaded successfully");
+    },
+    error:(err)=>{
+      alert("Upload failed");
+      console.log(err);
+    }
+  });
+}
 
 }

@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class NotesService {
 
-  apiUrl = "https://studyresourcebackend.onrender.com/api/notes";
+  apiUrl = "http://studyresourcebackend.onrender.com/api/notes";
 
   constructor(private http: HttpClient){}
 
